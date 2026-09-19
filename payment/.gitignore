@@ -1,0 +1,60 @@
+.# Environment
+# Ignore local environment files
+.env
+.env.*.local
+.env.local
+.env.production
+
+# Node modules
+node_modules/
+
+# Monorepo/service folders
+SERVICES/**/node_modules/
+SERVICES/**/dist/
+SERVICES/**/build/
+SERVICES/**/out/
+SERVICES/**/coverage/
+BACKEND/node_modules/
+FRONTEND/node_modules/
+
+# TypeScript
+*.tsbuildinfo
+
+# Build output
+dist/
+build/
+out/
+lib/
+coverage/
+*.tgz
+
+# Compiled JS (if generated in-repo)
+*.js
+*.js.map
+
+# IDEs and editors
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Caches and tooling
+.cache/
+.parcel-cache/
+.turbo/
+.tmp/
+
+# Framework/devtool folders
+.next/
+.vite/
+.nuxt/
+
+# Uploads/temp (service-specific)
+uploads/
+tmp/
