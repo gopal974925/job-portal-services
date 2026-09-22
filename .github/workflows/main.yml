@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - '/**'
+      - '**'
 
 concurrency:                      # never run two deploys at once
   group: deploy-backend
