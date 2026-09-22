@@ -1,4 +1,4 @@
-import { application, json, NextFunction, Request, Response } from "express";
+import {  NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import {sql} from "../utils/db.js"
 import tryCatch from "../utils/tryCatch.js";

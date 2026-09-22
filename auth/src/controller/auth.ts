@@ -9,7 +9,6 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import dotenv from "dotenv";
 import { forgotPasswordTemplate } from "../template.js";
 import { publishtopic } from "../producer.js";
-import { log } from "console";
 import { redisclient } from "../index.js";
 dotenv.config();
 
@@ -137,7 +136,6 @@ export const forgotPassword = tryCatch(async (req, res, next) => {
     WHERE email = ${email}
   `;
 
-  // Don't reveal whether the email exists
   if (users.length === 0) {
     return res.json({
       message: "that not email exists, ",

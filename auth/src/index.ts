@@ -1,9 +1,7 @@
 import app from './app.js';
 import dotenv from 'dotenv';
 import router from './routes/auth.js';
-import authroutes from './routes/auth.js';
 import {sql} from "./utils/db.js"
-import upload from './middleware/multer.js';
 import { connnectKafka } from './producer.js';
 import {createClient} from "redis";
 

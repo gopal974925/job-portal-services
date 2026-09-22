@@ -6,7 +6,6 @@ import { sql } from "../utils/db.js";
 import { Response } from "express";
 import getBuffer from "../utils/buffer.js";
 import axios from "axios"
-import { loadEnvFile, threadCpuUsage } from "process";
 import { applicationStatusUpdateTemplate } from "../template.js";
 import { publishtopic } from "../utils/producer.js";
 import { error, log } from "console";
@@ -19,20 +18,20 @@ export const createcompany = tryCatch(
   ) => {
     const user = req.user;
 
-    // Check authentication
+  
     if (!user) {
       throw new ErrorHandler(401, "Authentication required");
     }
 
-    // Check recruiter role
+
     if (user.role !== "jobrecruiter") {
       throw new ErrorHandler(403, "Forbidden");
     }
 
-    // Get body data
+
     const { name, description, website } = req.body;
 
-    // Validate fields
+
     if (!name || !description || !website) {
       throw new ErrorHandler(400, "All fields are required");
     }
