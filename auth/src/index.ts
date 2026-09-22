@@ -13,7 +13,14 @@ dotenv.config();
 
 export  const redisclient=createClient({
   url:process.env.REDIS_URL,
+  pingInterval:30_000,
+  socket:{
+    connectTimeout:10_000,
+  }
 })
+redisclient.on("error", (err) => console.error("Redis error:", err));
+redisclient.on("reconnecting", () => console.warn("Redis reconnecting..."));
+redisclient.on("ready", () => console.log("Redis is connected successfully"));
 
 redisclient.connect()
 .then(()=>{
