@@ -12,6 +12,12 @@ router.get("/test-utils",(req,res)=> {
     })
   }, );
 
+
+  router.get("/test2-utils",(req,res)=> {
+  res.json({
+        message:"Working",
+    })
+  }, );
 router.post('/upload', async (req, res) => {
   try {
     const { buffer,public_id } = req.body;
