@@ -6,6 +6,11 @@ import * as fs from "node:fs";
 
 dotenv.config()
 const router = express.Router();
+router.get("/test-utils",(req,res)=> {
+  res.json({
+        message:"Working",
+    })
+  }, );
 
 router.post('/upload', async (req, res) => {
   try {

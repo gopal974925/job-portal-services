@@ -5,7 +5,7 @@ import upload from "../middleware/multer.js";
 const router = express.Router();
 
 
-router.get("/test", test);
+router.get("/test-auth", test);
 router.post("/register", upload, registerUser);
 router.post("/login", loginUser);
 router.post(["/forgot", "/forgot-password"], forgotPassword);

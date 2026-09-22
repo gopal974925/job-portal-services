@@ -4,7 +4,7 @@ import { test,getuserProfile, isauth,updateprofile, updateprofilepic, updateresu
 import  upload from "../middleware/multer.js";
 
 const router=express.Router();
-router.get("/",test)
+router.get("/test-user", test);
 router.get("/me",isauth,myProfie)
 router.get("/getallapplication",isauth,getAllApplication)
 router.get("/:userid",isauth,getuserProfile)

@@ -1,6 +1,7 @@
 import  express  from "express";
 import { isauth } from "../middleware/auth.js";
 import upload from "../middleware/multer.js";
+import ErrorHandler from "../utils/errorhadler.js";
 import { createcompany,
     createjob,deletecompany,
      getallactivejobs, 
@@ -13,6 +14,15 @@ import { createcompany,
     } from "../controller/job.js";
 
 const router=express.Router();
+
+router.get("/test-job", (req,res)=> {
+    try {
+      res.send("server is running");
+    } catch (error) {
+      throw new ErrorHandler(500, "Somthing went wrong");
+    }
+  },);
+
 
 router.post("/company/new",isauth,upload,createcompany)
 router.delete("/company/:companyid",isauth,deletecompany)
