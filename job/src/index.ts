@@ -2,9 +2,17 @@ import app from "./app.js"
 import dotenv from"dotenv"
 import {sql} from "./utils/db.js"
 import { connnectKafka } from "./utils/producer.js";
-
-
+import client from "prom-client";
 dotenv.config();
+
+const collectDefaultmetrix=client.collectDefaultMetrics;
+collectDefaultmetrix({register:client.register})
+
+app.get("/metrics",async (req,res)=>{
+  res.setHeader("content-Type",client.register.contentType);
+  const metrics=await client.register.metrics();
+  res.send(metrics);
+})
 
 async function initDB() {
   try {
