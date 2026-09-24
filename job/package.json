@@ -43,7 +43,6 @@
     "bcrypt": "^6.0.0",
     "concurrently": "^9.2.4",
     "nodemon": "^3.1.14",
-    "response-time": "^2.3.4",
     "typescript": "^7.0.2"
   }
 }
