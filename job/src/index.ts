@@ -4,7 +4,23 @@ import {sql} from "./utils/db.js"
 import { connnectKafka } from "./utils/producer.js";
 import client from "prom-client";
 import responsetime from "response-time"
+import { createLogger, transports } from "winston";
+import LokiTransport from "winston-loki";
 dotenv.config();
+const options = {
+  
+  transports: [
+    new LokiTransport({
+      labels:({
+        appName:"Job"
+      }),
+      host: "http://127.0.0.1:3100"
+    })
+  ]
+
+};
+const logger = createLogger(options);
+
 
 const collectDefaultmetrix=client.collectDefaultMetrics;
 collectDefaultmetrix({register:client.register})
@@ -16,7 +32,13 @@ const reqResTime=new client.Histogram({
   buckets:[1,50,100,200,400,500,80,1000,2000,3000]
 })
 
+const totalReqCounter=new client.Counter({
+    name:'total_req',
+    help:'tells total req'
+})
+
 app.use(responsetime((req, res, time) => {
+  totalReqCounter.inc();
     reqResTime.labels({
       method:req.method,
       route:req.url,
@@ -25,6 +47,7 @@ app.use(responsetime((req, res, time) => {
 }))
 
 app.get("/metrics",async (req,res)=>{
+  logger.info('req came to /metrics')
   res.setHeader("content-Type",client.register.contentType);
   const metrics=await client.register.metrics();
   res.send(metrics);
@@ -134,7 +157,8 @@ async function initDB() {
     `;
 
     console.log("Job service DB initialized successfully.");
-  } catch (error) {
+  } catch (error:any) {
+    logger.error(error.message)
     console.error("Error initializing database:", error);
     process.exit(1);
   }
