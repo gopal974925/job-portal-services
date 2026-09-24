@@ -14,7 +14,7 @@ const options = {
       labels:({
         appName:"Job"
       }),
-      host: "http://127.0.0.1:3100"
+      host: "http://13.200.217.93:3100"
     })
   ]
 
